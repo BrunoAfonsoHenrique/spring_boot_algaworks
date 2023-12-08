@@ -5,7 +5,6 @@ import com.algaworks.algafoodapi.notificacao.NivelUrgencia;
 import com.algaworks.algafoodapi.notificacao.Notificador;
 import com.algaworks.algafoodapi.notificacao.TipoDoNotificador;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
