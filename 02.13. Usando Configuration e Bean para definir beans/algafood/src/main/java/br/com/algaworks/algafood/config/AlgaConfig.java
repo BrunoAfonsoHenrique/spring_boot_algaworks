@@ -1,6 +1,5 @@
 //package br.com.algaworks.algafood.config;
 //
-//import br.com.algaworks.algafood.notificacao.Notificador;
 //import br.com.algaworks.algafood.notificacao.NotificadorEmail;
 //import br.com.algaworks.algafood.service.AtivacaoClienteService;
 //import org.springframework.context.annotation.Bean;

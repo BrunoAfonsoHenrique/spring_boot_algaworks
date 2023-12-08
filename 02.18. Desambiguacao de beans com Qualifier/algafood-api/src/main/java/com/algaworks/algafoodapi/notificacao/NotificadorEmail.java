@@ -2,11 +2,12 @@ package com.algaworks.algafoodapi.notificacao;
 
 
 import com.algaworks.algafoodapi.model.Cliente;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+@Qualifier("urgente")
 @Component
-@Primary
 public class NotificadorEmail implements Notificador {
 
     @Override
