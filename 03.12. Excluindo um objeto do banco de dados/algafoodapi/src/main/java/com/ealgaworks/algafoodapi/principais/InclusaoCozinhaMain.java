@@ -1,12 +1,13 @@
-package com.ealgaworks.algafoodapi.jpa;
+package com.ealgaworks.algafoodapi.principais;
 
 import com.ealgaworks.algafoodapi.AlgafoodapiApplication;
 import com.ealgaworks.algafoodapi.domain.model.Cozinha;
+import com.ealgaworks.algafoodapi.jpa.CadastroCozinha;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
-public class AlteracaoCozinhaMain {
+public class InclusaoCozinhaMain {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodapiApplication.class)
@@ -17,12 +18,16 @@ public class AlteracaoCozinhaMain {
                 .getBean(CadastroCozinha.class);
 
         Cozinha cozinha1 = new Cozinha();
-        cozinha1.setId(1L);
         cozinha1.setNome("Brasileira");
 
-        cadastroCozinha.salvar(cozinha1);
+        Cozinha cozinha2 = new Cozinha();
+        cozinha2.setNome("Japonesa");
 
+        cozinha1 = cadastroCozinha.salvar(cozinha1);
+        cozinha2 = cadastroCozinha.salvar(cozinha2);
 
+        System.out.printf("%d - %s\n",cozinha1.getId(), cozinha1.getNome());
+        System.out.printf("%d - %s\n",cozinha2.getId(), cozinha2.getNome());
     }
 
 }
