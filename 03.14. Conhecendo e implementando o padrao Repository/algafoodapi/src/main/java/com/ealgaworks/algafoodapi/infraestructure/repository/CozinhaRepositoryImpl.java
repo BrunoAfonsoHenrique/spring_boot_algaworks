@@ -1,6 +1,7 @@
-package com.ealgaworks.algafoodapi.jpa;
+package com.ealgaworks.algafoodapi.infraestructure.repository;
 
 import com.ealgaworks.algafoodapi.domain.model.Cozinha;
+import com.ealgaworks.algafoodapi.repository.CozinhaRepository;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -10,21 +11,23 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
-public class CadastroCozinha {
+public class CozinhaRepositoryImpl implements CozinhaRepository {
 
     @PersistenceContext
     private EntityManager manager;
 
     @Transactional
+    @Override
     public Cozinha salvar(Cozinha cozinha) {
         return manager.merge(cozinha);
     }
-
+    @Override
     public Cozinha buscarPorId(Long id) {
         Cozinha cozinhaBuscada = manager.find(Cozinha.class, id);
         return cozinhaBuscada;
     }
 
+    @Override
     public List<Cozinha> listar() {
         TypedQuery<Cozinha> query = manager.
                 createQuery("from Cozinha", Cozinha.class);
@@ -33,12 +36,9 @@ public class CadastroCozinha {
     }
 
     @Transactional
+    @Override
     public void remover(Cozinha cozinha) {
         cozinha = buscarPorId(cozinha.getId());
         manager.remove(cozinha);
     }
-
-
-
-
 }

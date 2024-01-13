@@ -2,7 +2,7 @@ package com.ealgaworks.algafoodapi.principais;
 
 import com.ealgaworks.algafoodapi.AlgafoodapiApplication;
 import com.ealgaworks.algafoodapi.domain.model.Cozinha;
-import com.ealgaworks.algafoodapi.jpa.CadastroCozinha;
+import com.ealgaworks.algafoodapi.repository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -14,13 +14,14 @@ public class BuscaCozinhaIdMain {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CadastroCozinha cadastroCozinha = applicationContext
-                .getBean(CadastroCozinha.class);
+        CozinhaRepository cozinhaRepository = applicationContext
+                .getBean(CozinhaRepository.class);
 
-        Cozinha cozinha = cadastroCozinha.buscarPorId(1L);
+        Cozinha cozinha = cozinhaRepository.buscarPorId(1L);
 
         System.out.println(cozinha.getNome());
 
     }
 
 }
+
