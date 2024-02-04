@@ -5,17 +5,20 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Estado {
+@Data
+@Table(name = "permissao")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Permissao {
 
-    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
 }

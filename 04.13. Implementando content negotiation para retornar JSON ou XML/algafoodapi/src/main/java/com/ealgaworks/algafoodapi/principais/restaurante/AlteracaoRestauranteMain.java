@@ -1,36 +1,34 @@
 package com.ealgaworks.algafoodapi.principais.restaurante;
 
 import com.ealgaworks.algafoodapi.AlgafoodapiApplication;
-import com.ealgaworks.algafoodapi.domain.model.Cozinha;
+import com.ealgaworks.algafoodapi.domain.model.FormaDePagamento;
 import com.ealgaworks.algafoodapi.domain.model.Restaurante;
+import com.ealgaworks.algafoodapi.repository.FormaPagamentoReository;
 import com.ealgaworks.algafoodapi.repository.RestauranteRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
+import org.springframework.dao.DataIntegrityViolationException;
 
-import java.math.BigDecimal;
-
-public class InclusaoRestauranteMain {
+public class AlteracaoRestauranteMain {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodapiApplication.class)
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        RestauranteRepository restauranteRepository = applicationContext
+        RestauranteRepository formaDePagamento = applicationContext
                 .getBean(RestauranteRepository.class);
 
-        Cozinha cozinha = new Cozinha();
-        cozinha.setId(1L);
-        cozinha.setNome("Tailandesa");
+        Restaurante restaurante1 = new Restaurante();
+        restaurante1.setId(1L);
+        restaurante1.setNome("Restaurante Master chef");
 
-        Restaurante restaurante = new Restaurante();
-        restaurante.setNome("Restaurante Pokemon");
-        restaurante.setTaxaFrete(BigDecimal.valueOf(5.89));
-        restaurante.setCozinha(cozinha);
-
-        restauranteRepository.salvar(restaurante);
-
+        try {
+            formaDePagamento.salvar(restaurante1);
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("Não é possivel alterar os dados do restaurante, pois está associado com outra tabela no BD.");
+        }
 
     }
 
