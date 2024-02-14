@@ -5,7 +5,7 @@ import com.ealgaworks.algafoodapi.domain.model.Cozinha;
 import com.ealgaworks.algafoodapi.repository.CozinhaRepository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
