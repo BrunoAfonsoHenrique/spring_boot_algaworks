@@ -27,7 +27,7 @@ public class RestauranteService {
         return restauranteRepository.buscarPorId(id);
     }
 
-    public Restaurante adicionar(Restaurante restaurante) {
+    public Restaurante salvar(Restaurante restaurante) {
         Long id = restaurante.getCozinha().getId();
         Cozinha cozinha = cozinhaRepository.buscarPorId(id);
         if (cozinha == null) {
@@ -36,4 +36,6 @@ public class RestauranteService {
         restaurante = restauranteRepository.salvar(restaurante);
         return restaurante;
     }
+
+
 }
