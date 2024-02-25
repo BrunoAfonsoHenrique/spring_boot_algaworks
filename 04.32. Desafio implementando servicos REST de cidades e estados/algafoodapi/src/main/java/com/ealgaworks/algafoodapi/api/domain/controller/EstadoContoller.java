@@ -23,7 +23,15 @@ public class EstadoContoller {
         return estadoService.listarTodosEstados();
     }
 
-    //TODO Buscar por Id ainda deve ser implementado
+    @GetMapping("/{estadoId}")
+    public ResponseEntity<Estado> buscar(@PathVariable Long estadoId) {
+        try {
+            Estado estadoBuscado = estadoService.buscarPorId(estadoId);
+            return ResponseEntity.status(HttpStatus.FOUND).body(estadoBuscado);
+        } catch (EntidadeNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
     @PostMapping("/adicionar")
     public ResponseEntity<Estado> adicionar(@RequestBody Estado estado) {

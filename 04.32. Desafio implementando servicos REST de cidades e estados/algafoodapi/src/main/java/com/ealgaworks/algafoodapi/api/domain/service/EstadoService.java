@@ -27,6 +27,17 @@ public class EstadoService {
         return estadoRepository.listar();
     }
 
+    public Estado buscarPorId(Long estadoId) {
+        Estado estadoAtual = estadoRepository.buscar(estadoId);
+
+        if (estadoAtual == null) {
+            throw new EntidadeNaoEncontradaException("Entidade nao licalizada na base de dados.");
+        }
+
+        return estadoAtual;
+
+    }
+
     public Estado adicionarNovoEstado(Estado estado) {
         return estadoRepository.salvar(estado);
     }
