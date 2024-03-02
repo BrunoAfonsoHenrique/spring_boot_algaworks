@@ -1,6 +1,0 @@
-Fazer o mapeamento das entidades:
-
--FormaDePagamento
--Permissao
--Cidade
--Estado

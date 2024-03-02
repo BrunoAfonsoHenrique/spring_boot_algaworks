@@ -69,36 +69,36 @@ public class RestauranteController {
 
     }
 
-    @PatchMapping("/atualizar-parcial/{restauranteId}")
-    public ResponseEntity<?> atualizarParcial(@PathVariable Long restauranteId,
-                                              @RequestBody Map<String, Object> campos) {
-
-        Restaurante restauranteAtual = service.buscarRestauranteId(restauranteId);
-
-        if (restauranteAtual == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        merge(campos, restauranteAtual);
-
-        return atualizar(restauranteId, restauranteAtual);
-
-    }
-
-    private void merge(Map<String, Object> dadosOrigem, Restaurante restauranteDestino) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Restaurante restauranteOrigem = objectMapper.convertValue(dadosOrigem, Restaurante.class);
-
-        dadosOrigem.forEach((nomePropriedade, valorPropriedade) -> {
-            Field field = ReflectionUtils.findField(Restaurante.class, nomePropriedade);
-            field.setAccessible(true);
-
-            Object novoValor = ReflectionUtils.getField(field, restauranteOrigem);
-
-//			System.out.println(nomePropriedade + " = " + valorPropriedade + " = " + novoValor);
-
-            ReflectionUtils.setField(field, restauranteDestino, novoValor);
-        });
-    }
+//    @PatchMapping("/atualizar-parcial/{restauranteId}")
+//    public ResponseEntity<?> atualizarParcial(@PathVariable Long restauranteId,
+//                                              @RequestBody Map<String, Object> campos) {
+//
+//        Restaurante restauranteAtual = service.buscarRestauranteId(restauranteId);
+//
+//        if (restauranteAtual == null) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//
+//        merge(campos, restauranteAtual);
+//
+//        return atualizar(restauranteId, restauranteAtual);
+//
+//    }
+//
+//    private void merge(Map<String, Object> dadosOrigem, Restaurante restauranteDestino) {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Restaurante restauranteOrigem = objectMapper.convertValue(dadosOrigem, Restaurante.class);
+//
+//        dadosOrigem.forEach((nomePropriedade, valorPropriedade) -> {
+//            Field field = ReflectionUtils.findField(Restaurante.class, nomePropriedade);
+//            field.setAccessible(true);
+//
+//            Object novoValor = ReflectionUtils.getField(field, restauranteOrigem);
+//
+////			System.out.println(nomePropriedade + " = " + valorPropriedade + " = " + novoValor);
+//
+//            ReflectionUtils.setField(field, restauranteDestino, novoValor);
+//        });
+//    }
 
 }
