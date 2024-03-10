@@ -1,6 +1,7 @@
 package com.ealgaworks.algafoodapi.api.domain.controller;
 
 import com.ealgaworks.algafoodapi.api.domain.exceptions.EntidadeNaoEncontradaException;
+import com.ealgaworks.algafoodapi.api.domain.model.Cozinha;
 import com.ealgaworks.algafoodapi.api.domain.model.Restaurante;
 import com.ealgaworks.algafoodapi.api.domain.service.RestauranteService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/restaurantes")
@@ -30,9 +32,15 @@ public class RestauranteController {
 
 
     @GetMapping("/{restauranteId}")
-    public ResponseEntity<Restaurante> buscarPorId(@PathVariable Long restauranteId) {
-        Restaurante restaurante = service.buscarRestauranteId(restauranteId);
-        return ResponseEntity.status(HttpStatus.FOUND).body(restaurante);
+    public ResponseEntity<Restaurante> buscar(@PathVariable Long restauranteId) {
+
+        try {
+            Restaurante restaurante = service.buscarPorId(restauranteId);
+            return ResponseEntity.status(HttpStatus.FOUND).body(restaurante);
+
+        } catch (EntidadeNaoEncontradaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
 
     }
 
@@ -52,7 +60,7 @@ public class RestauranteController {
                                        @RequestBody Restaurante restaurante) {
 
         try {
-            Restaurante restauranteAtual = service.buscarRestauranteId(restauranteId);
+            Restaurante restauranteAtual = service.buscarPorId(restauranteId);
 
             if (restauranteAtual != null) {
                 BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
@@ -73,7 +81,7 @@ public class RestauranteController {
     public ResponseEntity<?> atualizarParcial(@PathVariable Long restauranteId,
                                               @RequestBody Map<String, Object> campos) {
 
-        Restaurante restauranteAtual = service.buscarRestauranteId(restauranteId);
+        Restaurante restauranteAtual = service.buscarPorId(restauranteId);
 
         if (restauranteAtual == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

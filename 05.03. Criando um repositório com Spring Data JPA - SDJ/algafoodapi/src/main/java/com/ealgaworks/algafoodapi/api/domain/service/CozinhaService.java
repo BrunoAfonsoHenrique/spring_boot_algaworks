@@ -30,7 +30,7 @@ public class CozinhaService {
     public Optional<Cozinha> buscarPorId(Long id) {
         Optional<Cozinha> cozinha = cozinhaRepository.findById(id);
 
-        if(!cozinha.isPresent())  {
+        if(cozinha.isEmpty())  {
             throw new EntidadeNaoEncontradaException("Entidade nao encontrada na base de dados");
         }
 
@@ -46,7 +46,7 @@ public class CozinhaService {
 
         if (cozinhaAtual.isPresent()) {
             BeanUtils.copyProperties(cozinha, cozinhaAtual.get(), "id");
-//            return cozinhaRepository.save(cozinhaAtual.get());
+            cozinhaRepository.save(cozinhaAtual.get());
         } else {
             throw new EntidadeNaoEncontradaException("Entidade nao encontrada na base de dados");
         }
