@@ -18,7 +18,11 @@ public interface CozinhaRepository extends JpaRepository<Cozinha, Long> {
 
     // List<Cozinha> findAllByNome(String nome);
 
-     List<Cozinha> findTodasByNome(String nome); // ignora a palavra que esta entre o "find" e o "By"
+//     List<Cozinha> findTodasByNome(String nome); // ignora a palavra que esta entre o "find" e o "By"
+//
+//    Optional<Cozinha> findByNome(String nome);
+
+    List<Cozinha> findTodasByNomeContaining(String nome);
 
     Optional<Cozinha> findByNome(String nome);
 
