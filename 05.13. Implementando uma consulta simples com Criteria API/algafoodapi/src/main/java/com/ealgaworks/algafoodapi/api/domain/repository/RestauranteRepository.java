@@ -24,5 +24,5 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long>,
 
     int countByCozinhaId(Long cozinha);
 
-
+    
 }
