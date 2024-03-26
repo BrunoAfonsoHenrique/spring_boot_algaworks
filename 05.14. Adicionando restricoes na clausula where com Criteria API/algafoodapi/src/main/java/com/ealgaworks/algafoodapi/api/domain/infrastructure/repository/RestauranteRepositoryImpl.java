@@ -9,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 
 import java.util.List;
@@ -26,11 +28,17 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 
     @Override
     public List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
-        //Interface -> CriteriaBuilder é uma fabrica para construir elementos que precisamos para construir uma consulta
+        //Interface -> CriteriaBuilder serve como uma fabrica para construir elementos que precisamos para construir uma consulta
         CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 
         CriteriaQuery<Restaurante> criteria = criteriaBuilder.createQuery(Restaurante.class);
-        criteria.from(Restaurante.class); // from Restaurante
+        //root é o Restaurante
+        Root<Restaurante> root = criteria.from(Restaurante.class); // from Restaurante
+        Predicate nomePredicate = criteriaBuilder.like(root.get("nome"), "%" + nome + "%");
+        Predicate taxaInicialPredicate = criteriaBuilder.greaterThanOrEqualTo(root.get("taxaFrete"), taxaFreteInicial);
+        Predicate taxaFinalPredicate = criteriaBuilder.lessThanOrEqualTo(root.get("taxaFrete"), taxaFreteFinal);
+
+        criteria.where(nomePredicate, taxaInicialPredicate, taxaFinalPredicate);
 
 
         TypedQuery<Restaurante> query = manager.createQuery(criteria);
