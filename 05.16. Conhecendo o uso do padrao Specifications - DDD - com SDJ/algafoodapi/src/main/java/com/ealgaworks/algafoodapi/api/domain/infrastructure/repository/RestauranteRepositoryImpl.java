@@ -60,5 +60,11 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 
     }
 
+    /*
+        Um Predicate é uma condição ou expressão lógica que define critérios para filtrar resultados em uma consulta.
+        Na API Criteria, um Predicate é usado para criar cláusulas de filtro (como WHERE) em consultas.
+        Ele representa uma condição que deve ser verdadeira para que uma entidade seja incluída nos resultados da consulta.
+     */
+
 
 }

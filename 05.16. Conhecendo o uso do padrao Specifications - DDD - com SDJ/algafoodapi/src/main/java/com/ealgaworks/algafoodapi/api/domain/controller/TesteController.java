@@ -1,5 +1,7 @@
 package com.ealgaworks.algafoodapi.api.domain.controller;
 
+import com.ealgaworks.algafoodapi.api.domain.infrastructure.repository.specification.RestauranteComFreteGratisSpec;
+import com.ealgaworks.algafoodapi.api.domain.infrastructure.repository.specification.RestauranteComNomeSemelhanteSpec;
 import com.ealgaworks.algafoodapi.api.domain.model.Cozinha;
 import com.ealgaworks.algafoodapi.api.domain.model.Restaurante;
 import com.ealgaworks.algafoodapi.api.domain.repository.CozinhaRepository;
@@ -68,6 +70,16 @@ public class TesteController {
                                                       BigDecimal taxaFreteFinal) {
 
         return restauranteRepository.find(nome, taxaFreteInicial, taxaFreteFinal);
+
+    }
+
+    @GetMapping("/restaurantes/com-frete-gratis")
+    public List<Restaurante> restaurantesComFreteGratis(String nome) {
+
+        var comFreteFratis = new RestauranteComFreteGratisSpec();
+        var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+
+        return restauranteRepository.findAll(comFreteFratis.and(comNomeSemelhante));
 
     }
 }
