@@ -31,9 +31,7 @@ public class Restaurante {
 	private BigDecimal taxaFrete;
 
 	//Dono da associação é a tabela restaurante
-	@JsonIgnore
-	//@JsonIgnoreProperties({"hibernateLazyInitializer"})
-	@ManyToOne(fetch = FetchType.LAZY) // Quer que a associação carregue se precisar -> preguiçosa
+	@ManyToOne
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 
