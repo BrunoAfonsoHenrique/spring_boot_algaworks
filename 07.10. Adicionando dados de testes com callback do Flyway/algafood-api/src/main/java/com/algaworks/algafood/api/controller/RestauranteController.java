@@ -51,7 +51,7 @@ public class RestauranteController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
+	@PostMapping("/adicionar")
 	public ResponseEntity<?> adicionar(@RequestBody Restaurante restaurante) {
 		try {
 			restaurante = cadastroRestaurante.salvar(restaurante);
@@ -64,7 +64,7 @@ public class RestauranteController {
 		}
 	}
 	
-	@PutMapping("/{restauranteId}")
+	@PutMapping("/atualizar/{restauranteId}")
 	public ResponseEntity<?> atualizar(@PathVariable Long restauranteId,
 			@RequestBody Restaurante restaurante) {
 		try {
@@ -87,7 +87,7 @@ public class RestauranteController {
 		}
 	}
 	
-	@PatchMapping("/{restauranteId}")
+	@PatchMapping("/atualizar-parcial/{restauranteId}")
 	public ResponseEntity<?> atualizarParcial(@PathVariable Long restauranteId,
 			@RequestBody Map<String, Object> campos) {
 		Restaurante restauranteAtual = restauranteRepository

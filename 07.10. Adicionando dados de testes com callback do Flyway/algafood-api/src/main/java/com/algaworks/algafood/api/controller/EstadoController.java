@@ -49,13 +49,13 @@ public class EstadoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
+	@PostMapping("/adicionar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Estado adicionar(@RequestBody Estado estado) {
 		return cadastroEstado.salvar(estado);
 	}
 	
-	@PutMapping("/{estadoId}")
+	@PutMapping("/atualizar/{estadoId}")
 	public ResponseEntity<Estado> atualizar(@PathVariable Long estadoId,
 			@RequestBody Estado estado) {
 		Estado estadoAtual = estadoRepository.findById(estadoId).orElse(null);
@@ -70,7 +70,7 @@ public class EstadoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@DeleteMapping("/{estadoId}")
+	@DeleteMapping("/deletar/{estadoId}")
 	public ResponseEntity<?> remover(@PathVariable Long estadoId) {
 		try {
 			cadastroEstado.excluir(estadoId);	

@@ -48,7 +48,7 @@ public class CidadeController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
+	@PostMapping("/adicionar")
 	public ResponseEntity<?> adicionar(@RequestBody Cidade cidade) {
 		try {
 			cidade = cadastroCidade.salvar(cidade);
@@ -61,13 +61,11 @@ public class CidadeController {
 		}
 	}
 	
-	@PutMapping("/{cidadeId}")
+	@PutMapping("/atualizar/{cidadeId}")
 	public ResponseEntity<?> atualizar(@PathVariable Long cidadeId,
 			@RequestBody Cidade cidade) {
 		try {
-			// Podemos usar o orElse(null) também, que retorna a instância de cidade
-			// dentro do Optional, ou null, caso ele esteja vazio,
-			// mas nesse caso, temos a responsabilidade de tomar cuidado com NullPointerException
+
 			Cidade cidadeAtual = cidadeRepository.findById(cidadeId).orElse(null);
 			
 			if (cidadeAtual != null) {
@@ -85,7 +83,7 @@ public class CidadeController {
 		}
 	}
 	
-	@DeleteMapping("/{cidadeId}")
+	@DeleteMapping("/deletar/{cidadeId}")
 	public ResponseEntity<Cidade> remover(@PathVariable Long cidadeId) {
 		try {
 			cadastroCidade.excluir(cidadeId);	
